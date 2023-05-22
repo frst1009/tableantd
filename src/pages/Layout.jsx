@@ -1,11 +1,12 @@
 import React from 'react';
-import Navbar from './Navbar';
 import { Container } from '@mui/material'
+import ResponsiveAppBar from './Navbar';
+
 
 function Layout({ children }) {
   return (
     <div>
-      <Navbar />
+     <ResponsiveAppBar/>
       <Container maxWidth="lg">
         {children}
       </Container>
