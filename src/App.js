@@ -19,16 +19,20 @@
 import React from 'react';
 import { BrowserRouter, Routes,Route } from 'react-router-dom';
 import Home from './pages/Home';
-import Basket from './pages/Basket';
+import { BasketProvider } from './pages/BasketContext';
+import BasketPage from './pages/BasketPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
-         <BrowserRouter>
-           <Routes>
+
+        
+    <BasketProvider>    <BrowserRouter><Routes>
              <Route path="/" element={<Home/>} />  
-             <Route path="/basket" element={<Basket/>}    />
-             </Routes>
-       </BrowserRouter>
+             <Route path="/basket" element={<BasketPage/>}    />
+             <Route path="/login" element={<LoginPage/>}    />
+             </Routes> </BrowserRouter></BasketProvider>   
+      
   );
 }
 

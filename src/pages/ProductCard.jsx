@@ -4,8 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { useContext } from 'react';
+import BasketContext from './BasketContext'; 
 
-export default function ProductCard({ product, handleClick }) {
+export default function ProductCard({ product }) {
+
+  const { addToBasket } = useContext(BasketContext); 
+
+  const handleAddToBasket = () => {
+    addToBasket(product); 
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardActionArea>
@@ -24,7 +32,7 @@ export default function ProductCard({ product, handleClick }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" onClick={()=>handleClick(product.id)}>
+        <Button size="small" color="primary" onClick={handleAddToBasket}>
           Add
         </Button>
         <Typography variant="h6" component="p">

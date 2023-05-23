@@ -10,13 +10,16 @@ import Tooltip from '@mui/material/Tooltip';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
+import { useContext } from 'react';
+import BasketContext from './BasketContext'; 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+
 const WhiteShoppingBasketIcon = styled(ShoppingBasketIcon)({
   color: 'white',
 });
 
 function ResponsiveAppBar() {
+  const { basket } = useContext(BasketContext);
   return (
     <AppBar position="static" sx={{ backgroundColor: 'black' }}>
       <Toolbar disableGutters>
@@ -39,14 +42,18 @@ function ResponsiveAppBar() {
         </Typography>
 
         <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-          {pages.map((page) => (
-            <Button
-              key={page}
+
+           <Link to={"/"}> <Button
               sx={{ my: 2, mx: 1, color: 'white' }}
             >
-              {page}
-            </Button>
-          ))}
+              Products
+            </Button></Link>
+            <Link to={"/login"}> <Button
+              sx={{ my: 2, mx: 1, color: 'white' }}
+            >
+              Login
+            </Button></Link>
+
         </Box>
 
         <Box sx={{ ml: 'auto' }}>
@@ -55,6 +62,9 @@ function ResponsiveAppBar() {
              <Link to={"/Basket"}> <WhiteShoppingBasketIcon /></Link> 
             </IconButton>
           </Tooltip>
+          <Typography variant="subtitle1" sx={{ color: 'white' }}>
+           ( {basket.length} )
+          </Typography>
         </Box>
       </Toolbar>
     </AppBar>

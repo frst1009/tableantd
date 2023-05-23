@@ -3,7 +3,6 @@ import ProductCard from './ProductCard';
 import Grid from '@mui/material/Grid';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-import Basket from './Basket';
 
 function ProductGrid() {
   const { data, isLoading, error } = useQuery('categoryData', () => {
@@ -24,7 +23,6 @@ function ProductGrid() {
         {data?.map((product) => (
           <Grid xs={4} md={2} container spacing={1} key={product.id} margin={3}>
             <ProductCard product={product} />
-            <Basket data={data} />
           </Grid>
         ))}
       </Grid>

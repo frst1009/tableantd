@@ -1,34 +1,40 @@
-import React, { useState } from "react";
-import ResponsiveAppBar from "./Navbar";
-import ProductCard from "./ProductCard";
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { useContext } from 'react';
+import  BasketContext  from './BasketContext'; 
+import {  CardActionArea, CardActions } from '@mui/material';
 
 
-function Basket(data) {
-  const [basketItems, setBasketItems] = useState([]);
+export default function Basket() {
+  const { basket } = useContext(BasketContext); 
 
-  const handleClick = (id) => {
-    const productToAdd = data.find((product) => product.id === id);
-    setBasketItems([...basketItems, productToAdd]);
-  }
 
-  return (
-    <>
-      <ResponsiveAppBar />
-      <div>
-        <h2>Basket Items</h2>
-        <ul>
-          {basketItems.map((item) => (
-            <li key={item.id}>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <p>{item.price}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <ProductCard handleClick={handleClick} />
-    </>
-  );
+  return (<>
+    {basket.map((product) => (
+   <Card sx={{ maxWidth: 345 }}>
+   <CardActionArea>
+   <CardMedia
+      sx={{ height: 140 }}
+       image={product.image}
+       title={product.name}
+     />
+     <CardContent>
+       <Typography gutterBottom variant="h5" component="div">
+       {product.name}
+       </Typography>
+       <Typography variant="body2" color="text.secondary">
+       {product.description.slice(0,20)}
+       </Typography>
+     </CardContent>
+   </CardActionArea>
+   <CardActions>
+     <Typography variant="h6" component="p">
+       ${product.price}
+     </Typography>
+   </CardActions>
+ </Card>
+  ))}</>)
 }
-
-export default Basket;
